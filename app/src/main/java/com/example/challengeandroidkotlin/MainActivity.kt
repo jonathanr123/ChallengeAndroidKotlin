@@ -1,9 +1,12 @@
 package com.example.challengeandroidkotlin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challengeandroidkotlin.Adapter.MovieAdapter
+import com.example.challengeandroidkotlin.Adapter.MovieAdapter.OnMovieClickListener
 import com.example.challengeandroidkotlin.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +14,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnMovieClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MovieAdapter
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView(){
-        adapter = MovieAdapter(movieImages)
+        adapter = MovieAdapter(movieImages, this)
         binding.rvMovie.layoutManager = LinearLayoutManager(this)
         binding.rvMovie.adapter = adapter
     }
@@ -63,6 +66,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onMovieClick(id: Int) {
+        val intent = Intent (this, MovieDetailActivity::class.java)
+        intent.putExtra("id",id)
+        startActivity(intent)
+        println("$id esto es el id")
     }
 }
 
