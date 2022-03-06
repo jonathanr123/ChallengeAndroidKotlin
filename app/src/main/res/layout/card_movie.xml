@@ -44,7 +44,7 @@
                 android:id="@+id/idInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descripcion"
+                android:text="see more..."
                 android:layout_marginBottom="15dp"
                 android:layout_marginRight="10dp"/>
 

@@ -28,7 +28,6 @@ class MovieAdapter(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = images[position]
-        println("${item.title} Esto es del adapter")
         holder.bind("https://image.tmdb.org/t/p/w500_and_h282_face"+item.poster_path, item.title)
         holder.itemView.setOnClickListener{ itemClickListener.onMovieClick(item.id)}
     }

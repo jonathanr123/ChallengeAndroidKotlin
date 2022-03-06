@@ -3,6 +3,7 @@ package com.example.challengeandroidkotlin
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challengeandroidkotlin.Adapter.MovieAdapter
@@ -25,9 +26,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initRecyclerView()
-
         listPopularMovies()
-
     }
 
     private fun initRecyclerView(){
@@ -36,6 +35,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
         binding.rvMovie.adapter = adapter
     }
 
+    //Using retrofit to consume the api
     private fun getRetrofit():Retrofit{
         return Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/movie/")
@@ -43,17 +43,11 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
             .build()
     }
 
+    //Call the api, save the response and display it in RecyclerView
     private fun listPopularMovies(){
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(APIService::class.java).getMoviePopular("popular?api_key=a9548caf23fe23d2ebb393ca325cd3bf&language=en-US&page=1")
             val moviesData = call.body()?.results
-            //println("${puppies?.results} DE UNA MAS") //Forma de entrar y manipular la info de array
-            //val imagesMovie= arrayListOf<String>()
-            /*val moviesData=puppies?.results
-            for (movie in puppies?.results!!){
-                imagesMovie.add("https://image.tmdb.org/t/p/w500_and_h282_face"+movie.poster_path)
-            }*/
-            println("$moviesData LISTA DE PELICULAS")
 
             runOnUiThread {
                 if(call.isSuccessful){
@@ -62,17 +56,22 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
                     adapter.notifyDataSetChanged()
 
                 }else{
-                    /*showError()*/
+                    showError()
                 }
             }
         }
     }
 
+    //Show an error message
+    private fun showError() {
+        Toast.makeText(this, "An error has ocurred", Toast.LENGTH_SHORT).show()
+    }
+
+    //Pass the ID of the selected movie to MovieDetailActivity
     override fun onMovieClick(id: Int) {
         val intent = Intent (this, MovieDetailActivity::class.java)
-        intent.putExtra("id",id)
+        intent.putExtra("id","$id")
         startActivity(intent)
-        println("$id esto es el id")
     }
 }
 
