@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
-import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challengeandroidkotlin.Adapter.MovieAdapter
@@ -80,7 +79,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
     }
 
     //Call the api, save the response and display it in RecyclerView
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     private fun listPopularMovies(newText: String?){
         if (newText==""||newText==null) {
             binding.messageEmpty.visibility= View.GONE
@@ -121,7 +120,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
             val movieFilter= movieCopy.filter { element -> element.title.lowercase().contains(newText)} as MutableList<ResultResponse>
             if(movieFilter.count()==0 && newText!=""){
                 binding.messageEmpty.visibility=View.VISIBLE
-                binding.messageEmpty.text="No results found"
+                "No results found".also { binding.messageEmpty.text = it }
             }else{
                 binding.messageEmpty.visibility= View.GONE
             }
@@ -141,7 +140,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
 
     //Show an error message
     private fun showError() {
-        Toast.makeText(this, "An error has ocurred", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "An error has occurred", Toast.LENGTH_SHORT).show()
     }
 
     //Pass the ID of the selected movie to MovieDetailActivity

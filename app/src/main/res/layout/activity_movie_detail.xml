@@ -43,7 +43,7 @@
                 android:id="@+id/titleMovieDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/text"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -53,22 +53,43 @@
                 android:id="@+id/descriptionMovieDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/text"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="10dp"/>
 
+            <TextView
+                android:id="@+id/calificationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/calificationText"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="5dp"/>
+
             <RatingBar
-                android:id="@+id/popularityBar"
+                android:id="@+id/rateBar"
+                android:numStars="5"
+                android:stepSize="0.5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/popularityMovie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:id="@+id/dateMovieDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/text"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="10dp"/>
@@ -77,7 +98,7 @@
                 android:id="@+id/languageMovieDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/text"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="10dp"/>
@@ -86,7 +107,7 @@
                 android:id="@+id/genreMovieDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/text"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="10dp"/>

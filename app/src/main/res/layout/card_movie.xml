@@ -35,7 +35,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Titulo"
+                android:text="@string/titleCard"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
@@ -44,9 +44,9 @@
                 android:id="@+id/idInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="see more..."
+                android:text="@string/subtitleCard"
                 android:layout_marginBottom="15dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginEnd="10dp"/>
 
         </LinearLayout>
 

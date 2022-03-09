@@ -1,11 +1,10 @@
+@file:Suppress("PackageName")
+
 package com.example.challengeandroidkotlin.Adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.challengeandroidkotlin.MovieDetailActivity
 import com.example.challengeandroidkotlin.MovieViewHolder
 import com.example.challengeandroidkotlin.R
 import com.example.challengeandroidkotlin.ResultResponse

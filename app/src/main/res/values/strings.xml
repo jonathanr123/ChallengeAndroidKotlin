@@ -2,4 +2,8 @@
     <string name="app_name">Challenge Android Kotlin</string>
     <string name="titleMain">Most Popular Movies</string>
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="calificationText">Rate this movie:</string>
+    <string name="text">TextView</string>
+    <string name="subtitleCard">see more…</string>
+    <string name="titleCard">Title</string>
 </resources>

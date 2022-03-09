@@ -17,7 +17,7 @@ data class MovieResponse (
 )
 
 //data class used in MovieDetailActivity
-data class genreResponse(
+data class GenreResponse(
     @SerializedName("id") var id: Int,
     @SerializedName("name") var name: String
 )
@@ -28,5 +28,15 @@ data class MovieDetailResponse(
     @SerializedName("overview") var description: String,
     @SerializedName("release_date") var date: String,
     @SerializedName("original_language") var language:String,
-    @SerializedName("genres") var genres: List<genreResponse>
+    @SerializedName("genres") var genres: List<GenreResponse>
+)
+
+data class Rating(
+    var value:Float
+)
+
+data class Message(
+    var success: Boolean,
+    var status_code: Int,
+    var status_message: String
 )
