@@ -22,9 +22,32 @@
         android:textColor="@color/black"
         android:textStyle="bold"/>
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchMovie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:queryHint="Search">
+
+    </androidx.appcompat.widget.SearchView>
+
+    <TextView
+        android:id="@+id/messageEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/rvMovie"
+        android:textAlignment="center"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMovie"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
