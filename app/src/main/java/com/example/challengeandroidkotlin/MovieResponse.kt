@@ -22,6 +22,7 @@ data class GenreResponse(
     @SerializedName("name") var name: String
 )
 data class MovieDetailResponse(
+    @SerializedName("id") var id: Int,
     @SerializedName("title") var title: String,
     @SerializedName("poster_path") var poster_path: String,
     @SerializedName("popularity") var popularity: Double,

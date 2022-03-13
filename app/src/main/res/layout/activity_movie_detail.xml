@@ -69,11 +69,11 @@
 
             <RatingBar
                 android:id="@+id/rateBar"
-                android:numStars="5"
-                android:stepSize="0.5"
-                android:layout_width="wrap_content"
+                android:layout_width="244dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:numStars="10"
+                android:stepSize="1"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <TextView
