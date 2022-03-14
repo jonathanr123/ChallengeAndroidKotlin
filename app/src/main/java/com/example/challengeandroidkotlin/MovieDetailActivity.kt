@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.RatingBar
 import android.widget.Toast
 import com.example.challengeandroidkotlin.databinding.ActivityMovieDetailBinding
+import com.example.checkinternetconnection.CheckNetworkConnection
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -23,6 +24,9 @@ class MovieDetailActivity : AppCompatActivity(), RatingBar.OnRatingBarChangeList
     private lateinit var sharedPref:SharedPreferences
     private lateinit var edit: SharedPreferences.Editor
 
+    private lateinit var checkNetworkConnection: CheckNetworkConnection
+    private var isConnect= false
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +34,7 @@ class MovieDetailActivity : AppCompatActivity(), RatingBar.OnRatingBarChangeList
         setContentView(binding.root)
         idSelect= intent.getStringExtra("id")!!
 
+        callNetworkConnection()
 
         //PreferenceManager
         sharedPref= getSharedPreferences("movies", Context.MODE_PRIVATE)
@@ -56,7 +61,9 @@ class MovieDetailActivity : AppCompatActivity(), RatingBar.OnRatingBarChangeList
             binding.genreMovieDetail.text= "Genre: $genreDetail"
         }else{
             //Query the api if the movie is not found in the device storage
-            showMovieDetail(idSelect)
+                if (isConnect) {
+                    showMovieDetail(idSelect)
+                }
         }
 
         binding.rateBar.onRatingBarChangeListener = this
@@ -129,8 +136,12 @@ class MovieDetailActivity : AppCompatActivity(), RatingBar.OnRatingBarChangeList
     }
 
     override fun onRatingChanged(p0: RatingBar?, p1: Float, p2: Boolean) {
+        if (isConnect){
         updateMovieRating(p1)
         println(p1)
+        } else {
+            Toast.makeText(this@MovieDetailActivity, "¡Oops, check your internet connection!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // Save data to device
@@ -153,6 +164,21 @@ class MovieDetailActivity : AppCompatActivity(), RatingBar.OnRatingBarChangeList
             gson.fromJson(movie, Array<MovieDetailResponse>::class.java)
         }else{
             emptyArray()
+        }
+    }
+
+    //Check the network connection
+    private fun callNetworkConnection() {
+        checkNetworkConnection = CheckNetworkConnection(application)
+        checkNetworkConnection.observe(this) { isConnected ->
+            if (isConnected) {
+                Toast.makeText(this, "¡Access Internet!", Toast.LENGTH_SHORT).show()
+                isConnect=true
+                showMovieDetail(idSelect)
+            } else {
+                Toast.makeText(this, "¡Oops, no internet access!", Toast.LENGTH_SHORT).show()
+                isConnect=false
+            }
         }
     }
 

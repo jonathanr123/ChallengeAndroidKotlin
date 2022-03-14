@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.challengeandroidkotlin.Adapter.MovieAdapter
 import com.example.challengeandroidkotlin.Adapter.MovieAdapter.OnMovieClickListener
 import com.example.challengeandroidkotlin.databinding.ActivityMainBinding
+import com.example.checkinternetconnection.CheckNetworkConnection
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,22 +27,26 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
     private var movieCopy = mutableListOf<ResultResponse>()
     lateinit var layoutManager: LinearLayoutManager
 
+    private lateinit var checkNetworkConnection: CheckNetworkConnection
+
     private var page = 1
-    private var control=1
+    private var control=false
 
     private var scrollEnabled=true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initRecyclerView()
-        listPopularMovies("")
 
+        callNetworkConnection()
         binding.searchMovie.setOnQueryTextListener(this)
 
         layoutManager = LinearLayoutManager(this)
         binding.rvMovie.layoutManager = layoutManager
+
 
         //API is called when the scroll reaches the end, to display new content
         binding.rvMovie.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -81,7 +86,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
     //Call the api, save the response and display it in RecyclerView
     @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     private fun listPopularMovies(newText: String?){
-        if (newText==""||newText==null) {
+        if ((newText==""||newText==null)&&control) {
             binding.messageEmpty.visibility= View.GONE
             scrollEnabled=true
 
@@ -97,10 +102,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
                             movieCopy.clear()
                         }
                         movieImages.addAll(moviesData!!)
-                        if (control==1){
                         movieCopy=movieImages
-                        control++}
-                        println(movieCopy)
 
                         if (::adapter.isInitialized) {
                             adapter.notifyDataSetChanged()
@@ -108,7 +110,6 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
                             adapter = MovieAdapter(movieImages, this@MainActivity)
                             binding.rvMovie.adapter = adapter
                         }
-
                     } else {
                         showError()
                     }
@@ -117,14 +118,24 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
         }
         else{
             scrollEnabled=false
-            val movieFilter= movieCopy.filter { element -> element.title.lowercase().contains(newText)} as MutableList<ResultResponse>
+            val movieFilter= mutableListOf<ResultResponse>()
+            val copy= mutableListOf<ResultResponse>()
+
+            for (movie in movieCopy){
+                if (movie.title.lowercase().contains(newText!!)){
+                    movieFilter.add(movie)
+                }
+                copy.add(movie)
+            }
+            movieCopy=copy
+
             if(movieFilter.count()==0 && newText!=""){
                 binding.messageEmpty.visibility=View.VISIBLE
                 "No results found".also { binding.messageEmpty.text = it }
             }else{
                 binding.messageEmpty.visibility= View.GONE
             }
-            movieCopy.addAll(movieImages)
+
             movieImages.clear()
             movieImages.addAll(movieFilter)
             if (::adapter.isInitialized) {
@@ -157,6 +168,23 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
     override fun onQueryTextChange(newText: String?): Boolean {
         listPopularMovies(newText?.lowercase())
         return true
+    }
+
+    //Check the network connection
+    private fun callNetworkConnection() {
+        checkNetworkConnection = CheckNetworkConnection(application)
+        checkNetworkConnection.observe(this) { isConnected ->
+            if (isConnected) {
+                Toast.makeText(this, "¡Access Internet!", Toast.LENGTH_SHORT).show()
+                scrollEnabled=true
+                control=true
+                listPopularMovies("")
+            } else {
+                Toast.makeText(this, "¡Oops, no internet access!", Toast.LENGTH_SHORT).show()
+                scrollEnabled=false
+                control=false
+            }
+        }
     }
 
 }
