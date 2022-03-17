@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_ChallengeAndroidKotlin)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
