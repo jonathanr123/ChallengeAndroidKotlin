@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.challengeandroidkotlin">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -16,10 +17,14 @@
             android:name=".MovieDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_movie_detail"
-            android:theme="@style/Theme.ChallengeAndroidKotlin.NoActionBar" />
+            android:theme="@style/Theme.ChallengeAndroidKotlin.NoActionBar"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

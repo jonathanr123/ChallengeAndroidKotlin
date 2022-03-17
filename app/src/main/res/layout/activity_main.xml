@@ -30,24 +30,45 @@
 
     </androidx.appcompat.widget.SearchView>
 
+    <FrameLayout
+        android:id="@+id/frameMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_red"
+        android:visibility="visible"
+        >
+        <TextView
+            android:id="@+id/msgConnection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:text="@string/msgConnection"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:drawableLeftCompat="@drawable/cloudicon" />
+    </FrameLayout>
+
     <TextView
         android:id="@+id/messageEmpty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/rvMovie"
-        android:textAlignment="center"/>
+        app:layout_constraintStart_toStartOf="@id/rvMovie" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMovie"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>
+
 
 </LinearLayout>

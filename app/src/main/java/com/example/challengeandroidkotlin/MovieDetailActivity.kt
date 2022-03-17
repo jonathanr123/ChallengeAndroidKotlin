@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.RatingBar
 import android.widget.Toast
 import com.example.challengeandroidkotlin.databinding.ActivityMovieDetailBinding
@@ -172,12 +173,13 @@ class MovieDetailActivity : AppCompatActivity(), RatingBar.OnRatingBarChangeList
         checkNetworkConnection = CheckNetworkConnection(application)
         checkNetworkConnection.observe(this) { isConnected ->
             if (isConnected) {
-                Toast.makeText(this, "¡Access Internet!", Toast.LENGTH_SHORT).show()
                 isConnect=true
+
                 showMovieDetail(idSelect)
+                binding.frameMsgDetail.visibility= View.GONE
             } else {
-                Toast.makeText(this, "¡Oops, no internet access!", Toast.LENGTH_SHORT).show()
                 isConnect=false
+                binding.frameMsgDetail.visibility=View.VISIBLE
             }
         }
     }

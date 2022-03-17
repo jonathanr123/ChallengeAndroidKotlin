@@ -32,8 +32,17 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
     private var page = 1
     private var control=false
 
-    private var scrollEnabled=true
+    private var scrollEnabled=false
 
+    private var word:String=""
+
+    override fun onRestart() {
+        super.onRestart()
+        control=false
+        scrollEnabled=false
+        binding.frameMsg.visibility=View.VISIBLE
+        callNetworkConnection()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -167,6 +176,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
 
     override fun onQueryTextChange(newText: String?): Boolean {
         listPopularMovies(newText?.lowercase())
+        word= newText!!
         return true
     }
 
@@ -175,14 +185,16 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
         checkNetworkConnection = CheckNetworkConnection(application)
         checkNetworkConnection.observe(this) { isConnected ->
             if (isConnected) {
-                Toast.makeText(this, "¡Access Internet!", Toast.LENGTH_SHORT).show()
                 scrollEnabled=true
                 control=true
-                listPopularMovies("")
+                if (word=="") {
+                    listPopularMovies("")
+                }
+                binding.frameMsg.visibility= View.GONE
             } else {
-                Toast.makeText(this, "¡Oops, no internet access!", Toast.LENGTH_SHORT).show()
                 scrollEnabled=false
                 control=false
+                binding.frameMsg.visibility= View.VISIBLE
             }
         }
     }

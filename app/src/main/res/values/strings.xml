@@ -6,4 +6,6 @@
     <string name="text">TextView</string>
     <string name="subtitleCard">see more…</string>
     <string name="titleCard">Title</string>
+    <string name="msgConnection">¡Oops, No internet Access!</string>
+    <string name="imageDetailDescription">No image</string>
 </resources>
