@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,15 +11,15 @@
         android:id="@+id/titleMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/titleMain"
+        android:textColor="@color/black"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="3dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
+        tools:layout_editor_absoluteY="3dp" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchMovie"
@@ -35,16 +34,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_red"
-        android:visibility="visible"
-        >
+        android:visibility="visible">
+
         <TextView
             android:id="@+id/msgConnection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:textAlignment="center"
             android:layout_gravity="center"
+            android:layout_marginBottom="0dp"
             android:text="@string/msgConnection"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:drawableLeftCompat="@drawable/cloudicon" />

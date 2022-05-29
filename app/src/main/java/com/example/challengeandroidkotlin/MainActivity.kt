@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challengeandroidkotlin.Adapter.MovieAdapter
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener, OnQueryTextListe
         callNetworkConnection()
         binding.searchMovie.setOnQueryTextListener(this)
 
-        layoutManager = LinearLayoutManager(this)
+        layoutManager = GridLayoutManager(this, 2)
         binding.rvMovie.layoutManager = layoutManager
 
 
