@@ -34,3 +34,7 @@ Pruebas realizadas en emulador Genymotion con Xiaomi Redmi Note 7 (Android 9.0 -
 Pruebas realizadas en dispositivo físico con Xiaomi Redmi Note 7 (Android 10).
 
 SDK mínimo: API 22 - Android 5.1 (Lollipop)
+
+## Demo
+<img src="https://github.com/jonathanr123/ChallengeAndroidKotlin/blob/master/assets/movieApp_2.jpg" width=80%>
+<img src="https://github.com/jonathanr123/ChallengeAndroidKotlin/blob/master/assets/movieApp_1.jpg" width=80%>
